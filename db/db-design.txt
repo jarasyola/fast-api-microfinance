@@ -1,0 +1,87 @@
+=== Microfinance DB ===
+Designer site: https://app.dbdesigner.net/designer
+WHERE:
+  - PK --> Primary Key
+  - FK --> Foreign Key
+
+Tables:
+    1. member
+        -id : int(11): PK
+        -salutation: string(10)
+        -first_name: string(20)
+        -middle_name : string (20)
+        -last_name : string (20)
+        -mobile_number : string (20)
+        -physical_address : string (255)
+        -gender : string(10)
+        -national_id : string (30)
+        -email: string (20)
+        -is_client: boolen, default: False
+        
+
+
+    2. member_moreinfo
+        -id: int (11): PK
+        -passport_id : string (30)
+        -driving_licence_id: string (30)
+        -voters_id : string (30)
+        -ward : string (30)
+        -house_number: string(30)
+        -debtor_employer: string(30)
+        -spouse_name: string (30)
+        -spouse_contact: string (30)
+        -referee : string (30)
+        -member_id int (11) RK
+
+    3. loan_trans
+        - id : int (11) PK
+        - date: date
+        - purpose: string (255)
+        - collateral: string (255)
+        - member_id : int (11) FK
+
+    4. loan_info
+        -id : int (11) PK
+        -loan_date: date
+        -loan_due: date
+        -payment_range: string (255)
+        -member_id : int (11) FK
+
+    5. loan_offers
+        - id : int (11) PK
+        - loan_name : string (30)
+        - amount : int (255)
+        - loan_range : string (255)
+        - setup_id : int (11)
+
+    6. payment_info
+       - id : int (11) PK
+       - paid_amount : int (255)
+       - payment_date: date
+       - member_id : int(11) FK
+       - info_id : int (11) FK
+
+    7. accounts
+       - id: int(11) PK
+       - loans_returned: int (11)
+       - loans_issued: int (11)
+       - transaction_id: int (11) FK
+
+    8. setup
+       -id : int (11) PK
+       -bank_details: string(255)
+       -debtor_locations: string(255)
+       -payment_frequency: string(255)
+       -loan_types: string (255)
+       -currency: string (255)
+       -loan_id : int (11) FK
+       -member_id: int (11) FK
+
+    9. reports
+       -id : int (11) PK
+       -report_id: int (11)
+       -member_id : int (11) FK
+       -loan_id : int (11)  FK
+       -info_id : int (11)  FK
+       -payment_id : int (11) FK
+       -date : date

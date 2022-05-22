@@ -1,9 +1,13 @@
 
-from typing import Optional,List
-from fastapi import FastAPI, Path, Query
+from fastapi import FastAPI
 from pydantic import BaseModel
 
 from api import users,members
+from db.db_setup import engine
+from db.models import user,member
+
+user.Base.metadata.create_all(bind=engine)
+member.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Fast API Microfinance",
