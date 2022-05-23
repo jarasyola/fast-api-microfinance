@@ -21,14 +21,14 @@ class Member(Timestamp, Base):
     __tablename__ = "members"
 
     id = Column(Integer,primary_key=True, index=True)
-    salutation = Column (String(10),nullable=False)
+    salutation = Column (String(10),nullable=True)  # nullable = True - testing
     first_name = Column (String(50), nullable=False)
-    middle_name = Column (String(50), nullable=False)
+    middle_name = Column (String(50), nullable=True)  # nullable = True - testing
     last_name = Column (String(50), nullable=False)
     mobile_number = Column (String(50), nullable=False)
-    physical_address = Column (String(50), nullable=False)
+    physical_address = Column (String(50), nullable=True) # nullable = True - testing
     gender = Column(Enum(Gender))
-    national_id = Column (String(50), nullable=False)
+    national_id = Column (String(50), nullable=True) # nullable = True - testing
     email = Column(EmailType, nullable=True)
     is_client = Column (Boolean, default=False)
 
