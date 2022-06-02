@@ -1,0 +1,14 @@
+Todo list:
+
+1. Setup environment - enable virtual environment, initialize git - DONE
+2. Install necessary packages - fastAPI - DONE
+3. Initial setup with main file and bare endpoints - DONE
+4. Database setup and connection - DONE
+5. Models creation for the endpoints - DONE
+6. Setting up pydantic schemas for the endpoints - DONE
+
+
+7. Implementing authentication (JWT Tokens) for the endpoints and users
+8. Adding more tables and relations on db
+9. Adding more endpoints
+10. Adding TDD - Test Driven Development

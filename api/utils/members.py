@@ -32,3 +32,11 @@ def create_member(db: Session, member: MemberCreate):
     db.commit()
     db.refresh(db_member)
     return db_member
+
+def destroy_member_by_id(db: Session, member_id: int):
+    existing_member = db.query(Member).filter(Member.id == member_id)
+    if not existing_member.first():
+        return 0
+    existing_member.delete(synchronize_session=False)
+    db.commit()
+    return 1

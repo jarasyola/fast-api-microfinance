@@ -1,15 +1,15 @@
 from typing import List
 
 import fastapi
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException,status
 from sqlalchemy.orm import Session
 
 from db.db_setup import get_db
 from pydantic_schemas.member import Member, MemberCreate
-from api.utils.members import get_member, get_members, create_member
+from api.utils.members import get_member, get_members, create_member, destroy_member_by_id
 
 router = fastapi.APIRouter(
-    prefix='/members',
+    prefix='/v1/members',
     tags=['Members']
 )
 
@@ -29,20 +29,21 @@ async def create_new_member(member: MemberCreate, db: Session = Depends(get_db))
 async def read_member(member_id: int, db: Session = Depends(get_db)):
     db_member = get_member(db=db, member_id=member_id)
     if db_member is None:
-        raise HTTPException(status_code=404, detail="Course not found")
+        raise HTTPException(status_code=404, detail=f"Member with id {member_id} is not found")
     return db_member
+
+
+@router.delete("/{member_id}")
+async def Delete_Member_by_id(member_id: int, db: Session = Depends(get_db)):
+    message= destroy_member_by_id(db=db, member_id=member_id)
+    if not message:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Member with id {member_id} does not exist")
+    return {"Detail": "Successfully deleted the member"}
+
 
 
 @router.patch("/{member_id}")
 async def update_member():
     return {"members": []}
 
-
-@router.delete("/{member_id}")
-async def delete_member():
-    return {"members": []}
-
-
-@router.get("/{member_id}/sections")
-async def read_member_sections():
-    return {"members": []}

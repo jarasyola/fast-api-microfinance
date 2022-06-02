@@ -10,7 +10,7 @@ from pydantic_schemas.user import UserCreate, User
 from api.utils.users import get_user, get_user_by_email, get_users, create_user
 
 router = fastapi.APIRouter(
-     prefix='/users',
+     prefix='/v1/users',
     tags=['Users']
 )
 
