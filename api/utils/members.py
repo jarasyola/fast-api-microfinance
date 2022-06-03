@@ -40,3 +40,12 @@ def destroy_member_by_id(db: Session, member_id: int):
     existing_member.delete(synchronize_session=False)
     db.commit()
     return 1
+
+def update_member_by_id(member_id:int, member:MemberCreate,db:Session,user_id:int):
+    existing_member = db.query(Member).filter(Member.id==member_id)
+    if not existing_member.first():
+        return 0
+    member.__dict__.update(user_id=user_id)
+    existing_member.update(member.__dict__)
+    db.commit()
+    return 1

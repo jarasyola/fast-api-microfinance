@@ -10,5 +10,5 @@ Todo list:
 
 7. Implementing authentication (JWT Tokens) for the endpoints and users
 8. Adding more tables and relations on db
-9. Adding more endpoints
+9. Adding more endpoints - adding Delete, 
 10. Adding TDD - Test Driven Development

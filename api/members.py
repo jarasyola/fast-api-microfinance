@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from db.db_setup import get_db
 from pydantic_schemas.member import Member, MemberCreate
-from api.utils.members import get_member, get_members, create_member, destroy_member_by_id
+from api.utils.members import get_member, get_members, create_member, destroy_member_by_id,update_member_by_id
 
 router = fastapi.APIRouter(
     prefix='/v1/members',
@@ -43,7 +43,12 @@ async def Delete_Member_by_id(member_id: int, db: Session = Depends(get_db)):
 
 
 
-@router.patch("/{member_id}")
-async def update_member():
-    return {"members": []}
+@router.put("/{member_id}")
+def update_member(member_id:int, member:MemberCreate,db:Session=Depends(get_db)):
+    user_id = 1
+    message = update_member_by_id(member_id=member_id, member=member, db=db,user_id=user_id)
+    if not message:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Member with id {member_id} does not exist")
+    return {"detail":"Successfully updated member data."}
 
